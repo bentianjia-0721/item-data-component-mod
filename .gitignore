@@ -1,0 +1,60 @@
+# Gradle
+.gradle/
+build/
+out/
+bin/
+gradle-*/
+!gradle/
+!gradle/wrapper/gradle-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.settings/
+.classpath
+.project
+
+# Fabric
+run/
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Minecraft
+crash-reports/
+saves/
+screenshots/
+*.log
+
+# Compiled files
+*.class
+*.jar
+!gradle/wrapper/gradle-wrapper.jar
+
+# Test output
+build/test/
+test-output/
+TestCommandParser.*
+test_compile.bat
+compile_log.txt
+VALIDATION_REPORT.md
+BUILD.md
+build-wrapper.sh
+
+# Temporary files
+*.tmp
+*.bak
+*.orig
+gradle.zip
+gradle.bat
+fix-gradle-ssl.bat
+gradle-8.10-extracted/
+fix-gradle-ssl.bat

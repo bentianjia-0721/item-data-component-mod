@@ -1,0 +1,8 @@
+{
+  "providers": [
+    {
+      "type": "reference",
+      "font": "minecraft:mojangles"
+    }
+  ]
+}

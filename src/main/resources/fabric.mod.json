@@ -1,0 +1,37 @@
+{
+	"schemaVersion": 1,
+	"id": "itemdatacomponent",
+	"version": "${version}",
+	"name": "Item Data Component Generator",
+	"description": "在游戏内生成物品数据组件命令的工具 | In-game tool for generating item data component commands",
+	"authors": [
+		"bentianjia"
+	],
+	"contact": {
+		"homepage": "https://github.com/yourusername/itemdatacomponent",
+		"sources": "https://github.com/yourusername/itemdatacomponent"
+	},
+	"license": "MIT",
+	"icon": "assets/itemdatacomp/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"com.itemdatacomp.client.ItemDataComponentClient"
+		],
+		"modmenu": [
+			"com.itemdatacomp.modmenu.ModMenuIntegration"
+		]
+	},
+	"mixins": [
+		"itemdatacomp.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.0",
+		"minecraft": ">=1.21 <1.27",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"modmenu": "*"
+	}
+}
