@@ -7,13 +7,16 @@ A Minecraft 1.21-26.2 Fabric mod - In-game item data component command generator
 ## Features
 
 - ✅ **GUI Editor** - Press `U` and `O` keys simultaneously to open the graphical interface
-- ✅ **Version Support** - Supports Java Edition 1.21.0 to 26.2
-- ✅ **Smart Search** - Fuzzy search with Chinese, English, and Pinyin initials
+- ✅ **Version Support** - Supports Java Edition 1.21.0 to 1.21.5 and snapshots 26.1 to 26.2
+- ✅ **Smart Search** - Fuzzy search for items with Chinese, English, and Pinyin initials
 - ✅ **Real-time Preview** - Display actual item rendering and hover tooltips
 - ✅ **Bilingual UI** - Auto-switch between English and Chinese based on client language
 - ✅ **Command Generation** - Generate ready-to-use `/give` commands
 - ✅ **Import/Export** - Support importing from commands and exporting to JSON
 - ✅ **ModMenu Integration** - Open from ModMenu config screen
+- ✅ **Specialized Editors** - 13 dedicated component editors (enchantments, attributes, potions, fireworks, etc.)
+- ✅ **Auto-Complete** - Smart suggestions for item IDs, enchantments, potion effects, and more
+- ✅ **Grouped View** - View components by functional groups or alphabetical order
 
 ## Version Compatibility
 
@@ -120,7 +123,81 @@ After building, the JAR file will be in `build/libs/` directory.
 - repair_cost - Anvil repair cost
 - repairable - Repairable items (1.21.2+)
 
-...and 48 more components
+### Food & Consumables (5 components)
+- food - Food properties
+- consumable - Consumable behavior (1.21.2+)
+- use_cooldown - Use cooldown (1.21.2+)
+- use_remainder - Item after use (1.21.2+)
+- death_protection - Death protection (1.21.2+)
+
+### Attribute Modifiers (1 component)
+- attribute_modifiers - Attribute modifiers
+
+### Armor Trim (2 components)
+- trim - Armor trim
+- dyed_color - Dyed color
+
+### Potions (3 components)
+- potion_contents - Potion contents
+- suspicious_stew_effects - Suspicious stew effects
+- ominous_bottle_amplifier - Ominous bottle amplifier
+
+### Container & Storage (4 components)
+- container - Container contents
+- bundle_contents - Bundle contents
+- container_loot - Container loot table
+- lock - Lock key
+
+### Block Interactions (8 components)
+- can_break - Breakable blocks
+- can_place_on - Placeable blocks
+- block_entity_data - Block entity data
+- block_state - Block state
+- base_color - Base color
+- banner_patterns - Banner patterns
+- bees - Bee data
+- note_block_sound - Note block sound
+
+### Projectiles (2 components)
+- charged_projectiles - Charged projectiles
+- intangible_projectile - Intangible projectile
+
+### Tools (1 component)
+- tool - Tool properties
+
+### Equipment (2 components)
+- equippable - Equippable properties (1.21.2+)
+- glider - Glider (1.21.2+)
+
+### Entity Data (2 components)
+- entity_data - Entity data
+- bucket_entity_data - Bucket entity data
+
+### Maps & Compass (4 components)
+- map_id - Map ID
+- map_color - Map color
+- map_decorations - Map decorations
+- lodestone_tracker - Lodestone tracker
+
+### Fireworks (2 components)
+- fireworks - Fireworks
+- firework_explosion - Firework star
+
+### Special Items (11 components)
+- profile - Player head profile
+- custom_data - Custom NBT data
+- debug_stick_state - Debug stick state
+- writable_book_content - Writable book content
+- written_book_content - Written book content
+- pot_decorations - Decorated pot sherds
+- recipes - Crafting recipes
+- jukebox_playable - Jukebox playable
+- instrument - Instrument type
+- additional_trade_cost - Additional trade cost (26.1+)
+- dye - Dye color (26.1+)
+- sulfur_cube_content - Sulfur cube content (26.2+)
+
+**Total: 70 data components** covering versions 1.21.0 to 26.2
 
 ## Development
 
@@ -131,34 +208,83 @@ src/main/java/com/itemdatacomp/
 ├── client/
 │   ├── ItemDataComponentClient.java    # Client entrypoint
 │   ├── data/
-│   │   ├── ItemRegistry.java           # Item registry (276 items)
-│   │   ├── ComponentRegistry.java      # Component registry (72 components)
+│   │   ├── ItemRegistry.java           # Item registry (295 items)
+│   │   ├── ComponentRegistry.java      # Component registry (70 components)
 │   │   └── MinecraftVersion.java       # Version management (1.21-26.2)
 │   ├── screen/
-│   │   ├── ComponentEditorScreen.java  # Main UI screen
-│   │   └── editor/                     # Specialized editors
-│   │       ├── ItemSelectorEditorScreen.java  # Item selector
-│   │       ├── EnchantmentEditorScreen.java   # Enchantment editor
-│   │       ├── AttributeEditorScreen.java     # Attribute editor
-│   │       └── ... (8+ editors)
+│   │   ├── ItemDataEditorScreen.java   # Main UI screen
+│   │   ├── ItemDataEditorScreenEnhanced.java  # Enhanced main UI
+│   │   ├── ComponentEditorScreen.java  # Component editor base
+│   │   ├── ParseErrorDialog.java       # Parse error dialog
+│   │   └── editor/                     # 13 specialized editors
+│   │       ├── TextInputEditorScreen.java
+│   │       ├── LoreEditorScreen.java
+│   │       ├── EnchantmentEditorScreen.java
+│   │       ├── AttributeEditorScreen.java
+│   │       ├── ArmorTrimEditorScreen.java
+│   │       ├── ColorPickerScreen.java
+│   │       ├── PotionEditorScreen.java
+│   │       ├── FoodEditorScreen.java
+│   │       ├── ConsumableEditorScreen.java
+│   │       ├── EquippableEditorScreen.java
+│   │       ├── EntityDataEditorScreen.java
+│   │       ├── FireworksEditorScreen.java
+│   │       └── ItemSelectorEditorScreen.java
 │   ├── widget/
 │   │   ├── ItemListWidget.java         # Item list widget
+│   │   ├── ItemListWidgetEnhanced.java # Enhanced item list
 │   │   ├── ComponentListWidget.java    # Component list widget
-│   │   └── AutoCompleteTextFieldWidget.java   # Auto-complete input
+│   │   ├── ComponentListWidgetEnhanced.java # Enhanced component list
+│   │   ├── PreviewPanelWidget.java     # Preview panel
+│   │   ├── AutoCompleteTextFieldWidget.java  # Auto-complete input
+│   │   ├── DropdownWidget.java         # Dropdown menu
+│   │   ├── ColorPickerWidget.java      # Color picker
+│   │   ├── ItemPreviewWidget.java      # Item preview
+│   │   └── suggestion/                 # Auto-complete providers
+│   │       ├── EnchantmentSuggestionProvider.java
+│   │       ├── AttributeSuggestionProvider.java
+│   │       ├── PotionEffectSuggestionProvider.java
+│   │       ├── EntitySuggestionProvider.java
+│   │       ├── SoundSuggestionProvider.java
+│   │       └── BlockSuggestionProvider.java
+│   ├── config/
+│   │   └── ConfigManager.java          # Config manager
+│   ├── font/
+│   │   └── ChineseFontManager.java     # Chinese font manager
 │   └── util/
 │       ├── PinyinMatcher.java          # Pinyin fuzzy search
-│       └── SNBTSerializer.java         # Command serialization
+│       ├── SNBTSerializer.java         # Command serialization
+│       └── CommandParser.java          # Command parser
 └── modmenu/
     └── ModMenuIntegration.java         # ModMenu integration
 ```
 
+### Specialized Editors
+
+The mod provides **13 dedicated component editors** for intuitive editing of complex data components:
+
+1. **TextInputEditorScreen** - General text input
+2. **LoreEditorScreen** - Multi-line item description editor
+3. **EnchantmentEditorScreen** - Enchantment selector (with search)
+4. **AttributeEditorScreen** - Attribute modifier editor
+5. **ArmorTrimEditorScreen** - Armor trim selector
+6. **ColorPickerScreen** - RGB color picker
+7. **PotionEditorScreen** - Potion effect editor
+8. **FoodEditorScreen** - Food properties editor
+9. **ConsumableEditorScreen** - Consumable behavior editor
+10. **EquippableEditorScreen** - Equipment properties editor
+11. **EntityDataEditorScreen** - Entity data editor
+12. **FireworksEditorScreen** - Fireworks editor
+13. **ItemSelectorEditorScreen** - Item selector
+
 ### Code Statistics
 
-- **Total Lines**: 3200+ lines
-- **Java Files**: 20+ files
-- **Component Definitions**: 72 components (1.21-26.2)
-- **Item Data**: 276 items (all 1.21-26.2 items)
-- **Editors**: 9 specialized component editors
+- **Total Lines**: 10,600+ lines
+- **Java Files**: 44 files
+- **Component Definitions**: 70 components (1.21-26.2)
+- **Item Data**: 295 items (all 1.21-26.2 items)
+- **Editors**: 13 specialized component editors
+- **Smart Components**: 6 auto-complete providers (enchantments, attributes, potions, entities, sounds, blocks/items)
 
 ## Contributing
 
