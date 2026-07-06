@@ -306,5 +306,5 @@ MIT License
 
 ## Contact
 
-- GitHub: https://github.com/bentianjia/item-data-component-mod
-- Issues: https://github.com/bentianjia/item-data-component-mod/issues
+- GitHub: https://github.com/bentianjia-0721/item-data-component-mod
+- Issues: https://github.com/bentianjia-0721/item-data-component-mod/issues
